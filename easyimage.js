@@ -59,8 +59,8 @@ exports.convert = function(options, callback) {
 	if (options.src === undefined || options.dst === undefined)return callback(error_messages['path']);
 	options.src = quoted_name(options.src);
 	options.dst = quoted_name(options.dst);
-	if (options.quality === undefined) imcmd = 'convert  +repage -colorspace sRGB ' + options.src + ' ' + options.dst;
-	else imcmd = 'convert  +repage -colorspace sRGB ' + options.src + ' -quality ' + options.quality + ' ' + options.dst;
+	if (options.quality === undefined) imcmd = 'convert  +repage -colorspace RGB ' + options.src + ' ' + options.dst;
+	else imcmd = 'convert  +repage -colorspace RGB ' + options.src + ' -quality ' + options.quality + ' ' + options.dst;
 	child = exec(imcmd, function(err, stdout, stderr) {
 		if (err) return callback(err);
 		info(options.dst, callback);
@@ -75,8 +75,8 @@ exports.resize = function(options, callback) {
 
 	options.src = quoted_name(options.src);
 	options.dst = quoted_name(options.dst);
-	if (options.quality === undefined) imcmd = 'convert  +repage -colorspace sRGB ' + options.src + ' -resize '+(options.width||'') + 'x' + (options.height||'') + ' ' + options.dst;
-	else imcmd = 'convert  +repage -colorspace sRGB ' + options.src + ' -resize '+(options.width||'') + 'x' + (options.height||'') + ' -quality ' + options.quality + ' ' + options.dst;
+	if (options.quality === undefined) imcmd = 'convert  +repage -colorspace RGB ' + options.src + ' -resize '+(options.width||'') + 'x' + (options.height||'') + ' ' + options.dst;
+	else imcmd = 'convert  +repage -colorspace RGB ' + options.src + ' -resize '+(options.width||'') + 'x' + (options.height||'') + ' -quality ' + options.quality + ' ' + options.dst;
 	child = exec(imcmd, function(err, stdout, stderr) {
 		if (err) return callback(err);
 		info(options.dst, callback);
@@ -94,8 +94,8 @@ exports.crop = function(options, callback) {
 	options.src = quoted_name(options.src);
 	options.dst = quoted_name(options.dst);
 
-	if (options.quality === undefined) imcmd = 'convert  +repage -colorspace sRGB ' + options.src + ' -gravity ' + options.gravity + ' -crop '+ options.cropwidth + 'x'+ options.cropheight + '+' + options.x + '+' + options.y + ' ' + options.dst;
-	else  imcmd = 'convert  +repage -colorspace sRGB ' + options.src + ' -gravity ' + options.gravity + ' -crop '+ options.cropwidth + 'x'+ options.cropheight + '+' + options.x + '+' + options.y + ' -quality ' + options.quality + ' ' + options.dst;
+	if (options.quality === undefined) imcmd = 'convert  +repage -colorspace RGB ' + options.src + ' -gravity ' + options.gravity + ' -crop '+ options.cropwidth + 'x'+ options.cropheight + '+' + options.x + '+' + options.y + ' ' + options.dst;
+	else  imcmd = 'convert  +repage -colorspace RGB ' + options.src + ' -gravity ' + options.gravity + ' -crop '+ options.cropwidth + 'x'+ options.cropheight + '+' + options.x + '+' + options.y + ' -quality ' + options.quality + ' ' + options.dst;
 	child = exec(imcmd, function(err, stdout, stderr) {
 		if (err) return callback(err);
 		info(options.dst, callback);
@@ -118,8 +118,8 @@ exports.rescrop = function(options, callback) {
 	options.src = quoted_name(options.src);
 	options.dst = quoted_name(options.dst);
 	options.fill = options.fill ? '^' : '';
-	if (options.quality === undefined) imcmd = 'convert  +repage -colorspace sRGB ' + options.src + ' -resize ' + options.width + 'x' + options.height + options.fill + ' -gravity ' + options.gravity + ' -crop '+ options.cropwidth + 'x'+ options.cropheight + '+' + options.x + '+' + options.y + ' ' + options.dst;
-	else imcmd = 'convert  +repage -colorspace sRGB ' + options.src + ' -resize ' + options.width + 'x' + options.height + options.fill + ' -gravity ' + options.gravity + ' -crop '+ options.cropwidth + 'x'+ options.cropheight + '+' + options.x + '+' + options.y + ' -quality ' + options.quality + ' ' + options.dst;
+	if (options.quality === undefined) imcmd = 'convert  +repage -colorspace RGB ' + options.src + ' -resize ' + options.width + 'x' + options.height + options.fill + ' -gravity ' + options.gravity + ' -crop '+ options.cropwidth + 'x'+ options.cropheight + '+' + options.x + '+' + options.y + ' ' + options.dst;
+	else imcmd = 'convert  +repage -colorspace RGB ' + options.src + ' -resize ' + options.width + 'x' + options.height + options.fill + ' -gravity ' + options.gravity + ' -crop '+ options.cropwidth + 'x'+ options.cropheight + '+' + options.x + '+' + options.y + ' -quality ' + options.quality + ' ' + options.dst;
 
 
 
@@ -157,8 +157,8 @@ exports.thumbnail = function(options, callback) {
 		else if (original.height > original.width) { resizeheight = ''; }
 
 		// resize and crop
-		if (options.quality === undefined) imcmd = 'convert  +repage -colorspace sRGB ' + options.src + ' -resize ' + resizewidth + 'x' + resizeheight + ' -gravity ' + options.gravity + ' -crop '+ options.width + 'x'+ options.height + '+' + options.x + '+' + options.y + ' ' + options.dst;
-		else imcmd = 'convert  +repage -colorspace sRGB ' + options.src + ' -resize '+ resizewidth + 'x' + resizeheight + ' -quality ' + options.quality + ' -gravity ' + options.gravity + ' -crop '+ options.width + 'x'+ options.height + '+' + options.x + '+' + options.y + ' -quality ' + options.quality + ' ' + options.dst;
+		if (options.quality === undefined) imcmd = 'convert  +repage -colorspace RGB ' + options.src + ' -resize ' + resizewidth + 'x' + resizeheight + ' -gravity ' + options.gravity + ' -crop '+ options.width + 'x'+ options.height + '+' + options.x + '+' + options.y + ' ' + options.dst;
+		else imcmd = 'convert  +repage -colorspace RGB ' + options.src + ' -resize '+ resizewidth + 'x' + resizeheight + ' -quality ' + options.quality + ' -gravity ' + options.gravity + ' -crop '+ options.width + 'x'+ options.height + '+' + options.x + '+' + options.y + ' -quality ' + options.quality + ' ' + options.dst;
 
 		imcmd = imcmd+' +repage';
 
